@@ -1,0 +1,61 @@
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+</head>
+
+<h1>Available books:</h1>
+<table id="available" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Year</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for book in books %}
+    <tr>
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.year_published }}</td>
+      <td><button type="button" onClick="window.location.href='rent_book/{{ book.id }}'">Rent</button></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<br>
+<br>
+<br>
+<h1>Your rented books:</h1>
+<table id="rented" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Year</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for rental in rentals %}
+    <tr>
+      <td>{{ rental.book.title }}</td>
+      <td>{{ rental.book.author }}</td>
+      <td>{{ rental.book.year_published }}</td>
+      <td><button type="button" onClick="window.location.href='return_book/{{ rental.book.id }}'">Return</button></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<script>
+$(document).ready(function() {
+    $('#available').DataTable();
+});
+$(document).ready(function() {
+    $('#rented').DataTable();
+});
+</script>
+
